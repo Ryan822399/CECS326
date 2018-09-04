@@ -13,11 +13,18 @@ struct data
 }obj;
 
 //In progress, should fill the char arrays with a random character, called each time memory is allocated in the initCharArray() function
-int fillArray(int i)
+int fillArray()
 {
-	cout << (obj.intArray[i]) << endl;
-	for (int j = 0; j < obj.intArray[i]; j++)
+    //cout << (i) << endl;
+	//cout << (obj.intArray[i]) << endl;
+	for (int i = 0; i < 20; i++)
 	{
+        cout << (obj.intArray[i]) << endl;
+        for (int j = 0; j < obj.intArray[i]; j++)
+        {
+
+            *(obj.charPointer[j]) = 'h';
+        }
 		//cout << j << endl;
 		//*(obj.charPointer[j]) = 'h';
 	}
@@ -29,9 +36,11 @@ void initCharArray()
 {
 	for (int i = 0; i < 20; i++)
 	{
+        //cout << (i) << endl;
+        //cout << (obj.intArray[i]) << endl;
 		obj.charPointer[i] = new char[obj.intArray[i]]();
 		//cout << *(obj.charPointer[i]) << endl;
-		//fillArray(i);
+		//fillArray();
 	}
 }
 
@@ -47,7 +56,6 @@ int initArray(int n)
 		initArray(n + 1);
 	}
 
-	initCharArray();
 	return 0;
 }
 
@@ -141,12 +149,14 @@ int main()
 {
 	//Initializing the integer array
 	initArray(1);
+    initCharArray();
+    fillArray();
 
 	//debugging
-	for (int i = 0; i < 19; i++)
-	{
-		cout << obj.intArray[i] << endl;
-	}
+	//for (int i = 0; i < 19; i++)
+	//{
+		//cout << obj.intArray[i] << endl;
+	//}
 
 	//the main is in a loop so that the main menu can be accessed multiple times
 	int userInput = 0;
