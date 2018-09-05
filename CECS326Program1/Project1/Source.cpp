@@ -4,6 +4,8 @@
 
 using namespace std;
 
+
+
 //Struct required by the instructions
 struct data
 {
@@ -12,21 +14,23 @@ struct data
 
 }obj;
 
+char randChar()
+{
+    char c = (90 - (rand() % 26));
+    return c;
+}
+
 //In progress, should fill the char arrays with a random character, called each time memory is allocated in the initCharArray() function
 int fillArray()
 {
-    //cout << (i) << endl;
-	//cout << (obj.intArray[i]) << endl;
 	for (int i = 0; i < 20; i++)
 	{
         cout << (obj.intArray[i]) << endl;
         for (int j = 0; j < obj.intArray[i]; j++)
         {
-
-            *(obj.charPointer[j]) = 'h';
+            char charToAssign = randChar();
+            *(obj.charPointer[i]+j) = charToAssign;
         }
-		//cout << j << endl;
-		//*(obj.charPointer[j]) = 'h';
 	}
 	return 0;
 }
@@ -36,11 +40,7 @@ void initCharArray()
 {
 	for (int i = 0; i < 20; i++)
 	{
-        //cout << (i) << endl;
-        //cout << (obj.intArray[i]) << endl;
 		obj.charPointer[i] = new char[obj.intArray[i]]();
-		//cout << *(obj.charPointer[i]) << endl;
-		//fillArray();
 	}
 }
 
@@ -82,6 +82,15 @@ int printMenu(int a)
 	return 0;
 }
 
+void arrayPrint(int index)
+{
+    cout << "Printing the first 10 characters of the array" << endl;
+    for (int i = 0; i < 10; i ++)
+    {
+        cout <<  *(obj.charPointer[index]+i) << endl;
+    }
+}
+
 //Prompts the user for the index of the array to manipulate then displays a sub menu of options for that index
 int accessPointer()
 {
@@ -116,9 +125,9 @@ int accessPointer()
 	//These are the three options when manipulating the data at the index specified
 	switch (subMenuInput)
 	{
-	case 1: cout << "Print the first 10 char's in the chosen array" << endl; break;
-	case 2: cout << "Delete all the char's associated with this pointer" << endl; break;
-	case 3: cout << " Return to main menu" << endl; break;
+        case 1: cout << arrayPrint(index) << endl; break;
+        case 2: cout << "Delete all the char's associated with this pointer" << endl; break;
+        case 3: cout << " Return to main menu" << endl; break;
 	}
 
 	return 0;
@@ -147,16 +156,11 @@ int exitProgram()
 
 int main()
 {
+    srand (time(0));
 	//Initializing the integer array
 	initArray(1);
     initCharArray();
     fillArray();
-
-	//debugging
-	//for (int i = 0; i < 19; i++)
-	//{
-		//cout << obj.intArray[i] << endl;
-	//}
 
 	//the main is in a loop so that the main menu can be accessed multiple times
 	int userInput = 0;
