@@ -105,6 +105,13 @@ void validateNotNull(int index)
         cout << "Memory will now be allocated and the characters will be initialized." << endl;
         obj.charPointer[index] = new char[obj.intArray[index]]();
         
+        cout << (obj.intArray[index]) << endl;
+        for (int j = 0; j < obj.intArray[index]; j++)
+        {
+            char charToAssign = randChar();
+            *(obj.charPointer[index]+j) = charToAssign;
+        }
+        
     }
 }
 
