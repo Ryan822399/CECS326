@@ -91,6 +91,23 @@ void arrayPrint(int index)
     }
 }
 
+void deletePointer(int index)
+{
+    delete obj.charPointer[index];
+    obj.charPointer[index] = NULL;
+}
+
+void validateNotNull(int index)
+{
+    if(obj.charPointer[index] == NULL)
+    {
+        cout << "You have attempted to access a deallocated!" << endl;
+        cout << "Memory will now be allocated and the characters will be initialized." << endl;
+        obj.charPointer[index] = new char[obj.intArray[index]]();
+        
+    }
+}
+
 //Prompts the user for the index of the array to manipulate then displays a sub menu of options for that index
 int accessPointer()
 {
@@ -107,6 +124,10 @@ int accessPointer()
 		cin.ignore(numeric_limits<streamsize>::max(), '\n');
 		cin >> index;
 	}
+    
+    //Ensuring that the pointer being access is not a deallocated pointer
+    validateNotNull(index);
+    
 
 	//Collecting user input for the sub menu
 	int subMenuInput = 0;
@@ -125,8 +146,8 @@ int accessPointer()
 	//These are the three options when manipulating the data at the index specified
 	switch (subMenuInput)
 	{
-        case 1: cout << arrayPrint(index) << endl; break;
-        case 2: cout << "Delete all the char's associated with this pointer" << endl; break;
+        case 1: arrayPrint(index); break;
+        case 2: deletePointer(index); break;
         case 3: cout << " Return to main menu" << endl; break;
 	}
 
@@ -136,21 +157,30 @@ int accessPointer()
 //Lists out all of the memory that has been deallocated
 int listDeallocatedMemory()
 {
-	cout << "Running function 2" << endl;
+    for (int i = 0; i < 20; i++)
+    {
+        if (obj.charPointer[i] == NULL)
+        {
+            cout << "Deallocated Index: " << i << endl;
+        }
+    }
 	return 0;
 }
 
 //physically deallocates memory from the system
 int deallocateMemory()
 {
-	cout << "Running function 3" << endl;
+    for (int i = 0; i < 20; i ++)
+    {
+        deletePointer(i);
+    }
 	return 0;
 }
 
 //deallocates all memory and exits the program
 int exitProgram()
 {
-	//exit function here
+    deallocateMemory();
 	exit(0);
 }
 
