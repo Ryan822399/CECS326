@@ -205,10 +205,16 @@ int exitProgram()
 
 int main()
 {
+    //Setting the srand time seed to be the system time ensuring a random sequence on each run
     srand (time(0));
-	//Initializing the integer array
-	initArray(1);
+
+    //Initializing the integer array by passing in 1 since the first integer will be initialized
+    initArray(1);
+	
+    //Allocating the memory for the character array
     initCharArray();
+
+    //Filling the array with random Characters 
     fillArray();
 
 	//the main is in a loop so that the main menu can be accessed multiple times
