@@ -14,23 +14,29 @@ struct data
 
 }obj;
 
+//Generates a random uppercase character then returns it to the function where it is stored into memory
 char randChar()
 {
     char c = (90 - (rand() % 26));
     return c;
 }
 
-//In progress, should fill the char arrays with a random character, called each time memory is allocated in the initCharArray() function
+//function used to fill all the character arrays with a random character based on the size dictated by the integer array
 int fillArray()
 {
+	//Console output letting the user know that the arrays are being filled.
+	cout << "Filling the arrays with random Upper case Characters," << endl;
+	cout << "This may take around 30 seconds." << endl;
+
+	//looping through the 20 character arrays to fill
 	for (int i = 0; i < 20; i++)
 	{
-        cout << (obj.intArray[i]) << endl;
-        for (int j = 0; j < obj.intArray[i]; j++)
-        {
-            char charToAssign = randChar();
-            *(obj.charPointer[i]+j) = charToAssign;
-        }
+		//Looping through the size of the integer array and adding in the random character
+		for (int j = 0; j < obj.intArray[i]; j++)
+		{
+		    char charToAssign = randChar();
+		    *(obj.charPointer[i]+j) = charToAssign;
+		}
 	}
 	return 0;
 }
@@ -45,7 +51,7 @@ void initCharArray()
 }
 
 //Fills the array using the function specified by the instructions
-//n will always start at 1
+//n will always start at 1 due to setting the very first array index to 2700
 int initArray(int n)
 {
 	obj.intArray[0] = 2700;
@@ -82,6 +88,7 @@ int printMenu(int a)
 	return 0;
 }
 
+//Prints the first 10 characters of the array based on the index of the array that is passed in 
 void arrayPrint(int index)
 {
     cout << "Printing the first 10 characters of the array" << endl;
@@ -91,14 +98,19 @@ void arrayPrint(int index)
     }
 }
 
+//Deletes the pointer at the index that is passed in
 void deletePointer(int index)
 {
+    //Made sure to delete the pointer first then set it to null thus preventing a memory leak
     delete obj.charPointer[index];
     obj.charPointer[index] = NULL;
 }
 
+//This is called from the access pointer function
+//This handles what to do in the scenario that a user attempts to access 
 void validateNotNull(int index)
 {
+    //In the scenario that there is a null pointer we know that the memory has been deallocated.
     if(obj.charPointer[index] == NULL)
     {
         cout << "You have attempted to access a deallocated!" << endl;
