@@ -59,7 +59,7 @@ int main()
 			strcpy(msg.message, outGoingMessage.c_str());
 			
 			//Specifying the mtype of receiver 1
-			msg.mtype = 113;
+			msg.mtype = 117;
 			msgsnd(qid, (struct msgbuf *)&msg, size, 0);	
 		} 
 		else

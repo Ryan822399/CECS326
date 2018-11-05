@@ -61,7 +61,7 @@ int main()
 			strcpy(msg.message, messageContent.c_str());
 			
 			//setting message mtype to 111
-			msg.mtype = 113;
+			msg.mtype = 117;
 
 			//printing out message info
 			cout << msgsnd(qid, (struct msgbuf *)&msg, size, 0) << endl;
@@ -74,7 +74,7 @@ int main()
 			strcpy(msg.message, messageContent.c_str());
 
 			//setting message mtype to 111
-			msg.mtype = 111;	
+			msg.mtype = 118;	
 
 			//printing out message info
 			cout << msgsnd(qid, (struct msgbuf *)&msg, size, 0) << endl;
