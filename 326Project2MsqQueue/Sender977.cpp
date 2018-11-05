@@ -14,7 +14,7 @@ int rand();
 
 int main()
 {
-	//Ensuring the number generated is random each time
+	//ensuring the number generated is random each time
     	srand (time(NULL));
 
 	//boolean value to control the forever loop
