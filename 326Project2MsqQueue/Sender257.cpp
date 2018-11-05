@@ -20,6 +20,7 @@ int main()
 
 	//variable used through the program
 	string outGoingMessage;
+	string messageContent;
 	int randValue;
 
     	//grabbing the existing queue from the other program
@@ -43,7 +44,7 @@ int main()
 	while(receiverRunning == true)
 	{
 		randValue = rand();
-		if(randValue % 257 == 0)
+		if(receiverRunning)
 		{
 			cout << "Sended : "<< randValue <<endl;
 			string m = "257: " + to_string(randValue);
@@ -51,7 +52,13 @@ int main()
 			msg.mtype = 118;
 			msgsnd(qid, (struct msgbuf *)&msg, size, 0);
 			msgrcv(qid, (struct msgbuf *)&msg, size, 120, 0);
-		}
+			messageContent = msg.message;
+			if (messageContent.compare("Receiver 2 has quit") == 0)
+			{
+				receiverRunning = false;
+				cout << messageContent << endl <<endl;
+			}
+		}		
 	}
 	cout << "\nReceiver 2 is no longer running, Sender257 quitting!"<<endl;
     return 0;

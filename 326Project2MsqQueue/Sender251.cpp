@@ -10,6 +10,7 @@
 #include <signal.h>
 #include <unistd.h>
 #include "Get_Info.h"
+#include <climits>
 
 using namespace std;
 
@@ -45,12 +46,14 @@ int main()
 	get_info(qid, (struct msgbuf *)&msg, size, 117);
 
 	cout << "Sender 251 has started"<<endl;
-	while(forever  == true)
-	{
-		//creating the random number
-		int randNumber = rand();
+	while(forever == true)
+	{	
+		int randNumber;
+		do{
+			randNumber = rand() % INT_MAX;
+		   }while (randNumber % 251 != 0);
 		//preventing the message from being 251 otherwise the identifier of the recievers will get confused
-		if (randNumber % 251 == 0)
+		if (forever)
 		{
 			//formatting to make the output look nice
 			cout.width(15);
@@ -62,11 +65,11 @@ int main()
 			msg.mtype = 117;
 			msgsnd(qid, (struct msgbuf *)&msg, size, 0);	
 		} 
-		else
-		{
-			cout.width(15); 
-			cout<< left << randNumber << " : Trash"<<endl;
-		}
+		//else
+		//{
+		//	cout.width(15); 
+		//	cout<< left << randNumber << " : Trash"<<endl;
+		//}
 	} 
     return 0;
 }

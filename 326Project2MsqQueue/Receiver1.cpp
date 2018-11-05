@@ -20,7 +20,7 @@ int main()
 
     //Grabbing the existing queue from the other program
 	int qid = msgget(ftok(".",'u'), 0);
-	cout << "Queue found, reciever is waiting..\n" <<endl;
+	cout << "Queue found, reciever1 is waiting..\n" <<endl;
 
     //declare my message buffer 
 	struct buf 
@@ -31,11 +31,11 @@ int main()
 	buf msg;
 	int size = sizeof(msg)-sizeof(long);
 
-    //froever while loop ensures the receiver to continue receiving until the exit message quit is recieved
+    //main receiver loop
     while(forever == true)
     {
-	//receiving the message with m.type 113
-        msgrcv(qid, (struct msgbuf *)&msg, size, 113, 0);
+	//receiving the message with m.type 117
+        msgrcv(qid, (struct msgbuf *)&msg, size, 117, 0);
 
 	//storing the full message
         queMessage = msg.message;
@@ -43,7 +43,7 @@ int main()
 	//storing the sender identifier
         senderIdentifier = queMessage.substr(0,3);
 
-	//stroing the real message from the que
+	//storing the real message from the que
         realMessage = queMessage.substr(5);
 
 	//in this scenario the quit message has been received thus the receiver needs to send back a message to the que center with a specific m.type letting the senders know it is dead

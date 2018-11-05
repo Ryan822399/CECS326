@@ -44,11 +44,9 @@ int main()
 	//Letting the user know the sender has begun
 	cout << "Sender 977 has started"<<endl;
 
-	do{			
-		//generating a random number ensuring that it is not 0
+	do{	
 		do{
 			randomGeneratedNumber = rand() % INT_MAX;
-			//number = randomNum;
 		   }while (randomGeneratedNumber % 997 != 0);
 		
 		//setting the message content to the random number generated as weel as including 
@@ -60,7 +58,7 @@ int main()
 			cout << "Sending to Receiver 1: " << messageContent;
 			strcpy(msg.message, messageContent.c_str());
 			
-			//setting message mtype to 111
+			//setting message mtype to 117
 			msg.mtype = 117;
 
 			//printing out message info
@@ -73,7 +71,7 @@ int main()
 			cout << "Sending to Receiver 2: " << messageContent;
 			strcpy(msg.message, messageContent.c_str());
 
-			//setting message mtype to 111
+			//setting message mtype to 118
 			msg.mtype = 118;	
 
 			//printing out message info
@@ -99,7 +97,7 @@ int main()
 			}
 			else
 			{
-				cout << "Message Recieved." << endl << endl;
+				cout << messageContent << endl << endl;
 			}
 		}
 		if (receiver2Alive == true)
@@ -118,12 +116,13 @@ int main()
 			}
 			else
 			{
-				cout << "Message Recieved." << endl << endl;
+				cout << messageContent << endl << endl;
 			}
 		}
 	//the do while loop will terminate if the random number generated is less than 100 as specified by the instructions
-	} while(number > 100);
-
+	} while(randomGeneratedNumber > 100);
+	
+	cout << "number less than 100 encountered, shutting sender977 down" << endl;
     //default return code for main
     return 0;
 }
